@@ -7,6 +7,11 @@
 This repository is the official implmentation of [DetZero: Rethinking Offboard 3D Object Detection with Long-term Sequential Point Clouds](https://github.com/PJLab-ADG/DetZero).
 
 
+
+https://github.com/PJLab-ADG/DetZero/assets/25716775/bbbd8735-25f9-4d64-a388-033970de7c06
+
+
+
 ## Framework
 ![teaser](sources/detzero-framework.png)
 
