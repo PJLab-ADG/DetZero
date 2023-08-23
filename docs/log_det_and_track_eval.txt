@@ -1,0 +1,76 @@
+2023-03-03 15:50:51,113   INFO  Namespace('det_result_tta.pkl')
+2023-03-03 15:50:51,115   INFO  Loading ground-truth infos
+2023-03-03 15:51:02,511   INFO  Prediction Set Length: 39987, Ground Truth Set Length: 39987.
+2023-03-03 15:51:02,512   INFO  Generating evaluation data pair (det, gt)
+2023-03-03 15:51:02,512   INFO  39987, 39987
+2023-03-03 15:51:05,946   INFO  	Evaluation data pair: 39987
+2023-03-03 15:51:05,947   INFO  Start Evaluation
+2023-03-03 16:05:20,079   INFO  ================= Evaluation Result =================
+2023-03-03 16:05:20,080   INFO  
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_1/AP: 0.8308 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_1/APH: 0.8257 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_2/AP: 0.7557 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_2/APH: 0.7509 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_1/AP: 0.8634 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_1/APH: 0.8323 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_2/AP: 0.7952 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_2/APH: 0.7647 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_1/AP: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_1/APH: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_2/AP: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_2/APH: 0.0000 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_1/AP: 0.8027 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_1/APH: 0.7936 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_2/AP: 0.7806 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_2/APH: 0.7716 
+
+2023-03-03 16:05:20,081   INFO  +------------+----------+----------+----------+----------+
+2023-03-03 16:05:20,082   INFO  | Category   |    L1/AP |   L1/APH |    L2/AP |   L2/APH |
+2023-03-03 16:05:20,082   INFO  +============+==========+==========+==========+==========+
+2023-03-03 16:05:20,082   INFO  | Vehicle    | 0.830797 | 0.825747 | 0.755701 | 0.75088  |
+2023-03-03 16:05:20,082   INFO  +------------+----------+----------+----------+----------+
+2023-03-03 16:05:20,082   INFO  | Pedestrain | 0.863391 | 0.832273 | 0.795222 | 0.764665 |
+2023-03-03 16:05:20,082   INFO  +------------+----------+----------+----------+----------+
+2023-03-03 16:05:20,082   INFO  | Cyclist    | 0.802749 | 0.793577 | 0.780556 | 0.77161  |
+2023-03-03 16:05:20,082   INFO  +------------+----------+----------+----------+----------+
+2023-03-03 16:05:20,082   INFO  | Sign       | 0        | 0        | 0        | 0        |
+2023-03-03 16:05:20,082   INFO  +------------+----------+----------+----------+----------+
+2023-03-03 16:05:20,082   INFO  Done.
+2023-03-05 16:28:07,038   INFO  Namespace(tracking_result.pkl)
+2023-03-05 16:28:07,039   INFO  Loading ground-truth infos
+2023-03-05 16:28:22,219   INFO  Prediction Set Length: 39987, Ground Truth Set Length: 39987.
+2023-03-05 16:28:22,235   INFO  Generating evaluation data pair (det, gt)
+2023-03-05 16:28:22,241   INFO  39987, 39987
+2023-03-05 16:28:35,286   INFO  	Evaluation data pair: 39987
+2023-03-05 16:28:35,287   INFO  Start Evaluation
+2023-03-05 16:56:59,545   INFO  ================= Evaluation Result =================
+2023-03-05 16:56:59,547   INFO  
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_1/AP: 0.8307 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_1/APH: 0.8257 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_2/AP: 0.7572 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_2/APH: 0.7524 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_1/AP: 0.8617 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_1/APH: 0.8307 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_2/AP: 0.7939 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_2/APH: 0.7634 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_1/AP: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_1/APH: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_2/AP: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_2/APH: 0.0000 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_1/AP: 0.8079 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_1/APH: 0.7986 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_2/AP: 0.7866 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_2/APH: 0.7775 
+
+2023-03-05 16:56:59,575   INFO  +------------+----------+----------+----------+----------+
+2023-03-05 16:56:59,576   INFO  | Category   |    L1/AP |   L1/APH |    L2/AP |   L2/APH |
+2023-03-05 16:56:59,576   INFO  +============+==========+==========+==========+==========+
+2023-03-05 16:56:59,576   INFO  | Vehicle    | 0.830747 | 0.825691 | 0.757218 | 0.752369 |
+2023-03-05 16:56:59,576   INFO  +------------+----------+----------+----------+----------+
+2023-03-05 16:56:59,576   INFO  | Pedestrain | 0.861695 | 0.830711 | 0.793877 | 0.76343  |
+2023-03-05 16:56:59,576   INFO  +------------+----------+----------+----------+----------+
+2023-03-05 16:56:59,576   INFO  | Cyclist    | 0.80786  | 0.7986   | 0.786551 | 0.777502 |
+2023-03-05 16:56:59,576   INFO  +------------+----------+----------+----------+----------+
+2023-03-05 16:56:59,577   INFO  | Sign       | 0        | 0        | 0        | 0        |
+2023-03-05 16:56:59,577   INFO  +------------+----------+----------+----------+----------+
+2023-03-05 16:56:59,577   INFO  Done.
