@@ -1,0 +1,22 @@
+DATASET: 'WaymoTrackDataset'
+DATA_PATH: '../../data/waymo'
+PROCESSED_DATA_TAG: 'waymo_processed_data'
+
+CLASS_NAME: ['Vehicle', 'Pedestrian', 'Cyclist']
+
+DATA_PROCESSOR:
+    - NAME: heading_process
+
+    # - NAME: low_confidence_box_filter
+
+    # - NAME: points_in_box
+
+    - NAME: overlap_box_filter
+      METHOD: max_score
+      CLASS_THRESHOLD: {
+          'Vehicle': 0.3,
+          'Pedestrian': 0.2,
+          'Cyclist': 0.2
+      }
+
+    - NAME: transform_to_global

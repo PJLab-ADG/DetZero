@@ -1,0 +1,22 @@
+DATASET: 'WaymoPositionDataset'
+DATA_PATH: '../../data/waymo'
+
+DATA_SPLIT: {
+    'train': train,
+    'test': val
+    # 'test': test
+}
+
+QUERY_NUM: 200
+QUERY_POINTS_NUM: 256
+MEMORY_POINTS_NUM: 48
+
+ENCODING: ['xyz', 'intensity', 'p2co', 'score']
+
+AUGMENTOR:
+    AUGMENT_FULL: False
+    LOCAL_SCALE: [0.9, 1.1]
+    LOCAL_TRANS_STD: [0.05, 0.05, 0.05]
+    FLIP_ALONG_X: 0.5
+    FLIP_ALONG_Y: 0.5
+    ROTATE_ALONG_Z: 0.5

@@ -1,0 +1,16 @@
+DATASET: 'WaymoConfidenceDataset'
+DATA_PATH: '../../data/waymo'
+
+DATA_SPLIT: {
+    'train': train,
+    'test': val
+}
+
+QUERY_NUM: 200
+QUERY_POINTS_NUM: 256
+
+ENCODING: ['xyz', 'intensity', 'p2co', 'score']
+
+AUGMENTOR:
+    AUGMENT_SINGLE: True
+    AUGMENT_ALL: True

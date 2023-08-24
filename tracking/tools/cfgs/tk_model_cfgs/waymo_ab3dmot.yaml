@@ -1,0 +1,61 @@
+DATA_CONFIG:
+    _BASE_CONFIG_: cfgs/tk_dataset_cfgs/waymo_dataset.yaml
+
+    DATA_PROCESSOR:
+        - NAME: heading_process
+
+        - NAME: low_confidence_box_filter
+        THRESHOLD: 0.1
+
+        - NAME: transform_to_global
+
+MODEL:
+    NAME: DetZeroTracker
+
+    TRACKING:
+        NAME: TrackManager
+        
+        FILTER:
+            NAME: AB3DMOT
+            X_DIM: 5
+            Z_DIM: 3
+            Q: [5, 15]
+            P: [50, 1000]
+            R: 5
+            DELTA_T: 0.1
+            
+        TRACK_AGE:
+            BIRTH_AGE: 3
+            DEATH_AGE: 2
+            
+        DATA_ASSOCIATION:
+            CLASS_NAME: ['Vehicle', 'Pedestrian', 'Cyclist']
+            DISTINGUISH_CLASS: False
+            DISTANCE_METHOD: 'IoUBEV'
+            ASSIGNMENT_METHOD: 'GNN'
+
+            STAGE:
+                NAME: 'one_stage'
+                FIRST_STAGE:
+                    DIST_THRESHOLD: 
+                        [0.1, 0.1, 0.1]
+        
+        TRACK_MERGE:
+            ENABLE: False
+
+        REVERSE_TRACKING:
+            ENABLE: False
+            
+    POST_PROCESS:
+        NAME: PostProcessor
+
+        CONFIG_LIST:
+            - NAME: motion_classify
+
+
+REFINING:
+    IOU_THRESHOLDS: {
+        'Vehicle': 0.3, 
+        'Pedestrian': 0.1, 
+        'Cyclist': 0.1
+    }

@@ -1,0 +1,11 @@
+numpy<=1.19.5
+numba==0.48.0
+tensorboardX
+easydict
+pyyaml
+tqdm
+opencv-python
+tabulate
+kornia
+scipy
+addict

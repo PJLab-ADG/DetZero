@@ -1,0 +1,82 @@
+DATASET: 'WaymoDetectionDataset'
+DATA_PATH: '../../data/waymo'
+PROCESSED_DATA_TAG: 'waymo_processed_data'
+
+POINT_CLOUD_RANGE: [-75.2, -75.2, -2, 75.2, 75.2, 4]
+
+DATA_SPLIT: {
+    'train': train,
+    'test': val
+}
+
+SAMPLED_INTERVAL: {
+    'train': 1,
+    'test': 1
+}
+
+SWEEP_COUNT: [-1, 1]
+TTA: False
+
+DATA_AUGMENTOR:
+    DISABLE_AUG_LIST: ['placeholder']
+    AUG_CONFIG_LIST:
+        - NAME: gt_sampling
+          USE_ROAD_PLANE: False
+          DB_INFO_PATH:
+              - waymo_dbinfos_train_sampled_1_sweep_3.pkl
+          PREPARE: {
+             filter_by_min_points: ['Vehicle:5', 'Pedestrian:5', 'Cyclist:5'],
+             filter_by_difficulty: [-1],
+          }
+          NUM_POINT_FEATURES: 6
+          SAMPLE_GROUPS: ['Vehicle:15', 'Pedestrian:10', 'Cyclist:10']
+          REMOVE_EXTRA_WIDTH: [0.0, 0.0, 0.0]
+          LIMIT_WHOLE_SCENE: True
+
+        - NAME: random_world_flip
+          ALONG_AXIS_LIST: ['x', 'y']
+
+        - NAME: random_world_rotation
+          WORLD_ROT_ANGLE: [-0.78539816, 0.78539816]
+
+        - NAME: random_world_scaling
+          WORLD_SCALE_RANGE: [0.95, 1.05]
+
+        - NAME: random_world_translation
+          STD: 0.5
+
+TEST_TIME_AUGMENTOR:
+    DISABLE_AUG_LIST: ['placeholder']
+    AUG_CONFIG_LIST:
+        - NAME: world_flip
+          ALONG_AXIS_LIST: ['x', 'y']
+
+        - NAME: world_rotation
+          ROT_ANGLE: [0, -0.39365818, -0.78539816, -1.17809724, -2.74889357, 0.39365818, 0.78539816, 1.17809724, 2.74889357, 3.14159265]  
+
+        - NAME: world_scaling
+          SCALE_RANGE: [0.95, 1.05]
+
+POINT_FEATURE_ENCODING: {
+    encoding_type: absolute_coordinates_encoding,
+    used_feature_list: ['x', 'y', 'z', 'intensity', 'elongation', 'offset'],
+    src_feature_list: ['x', 'y', 'z', 'intensity', 'elongation', 'offset'],
+}
+
+DATA_PROCESSOR:
+    - NAME: mask_points_and_boxes_outside_range
+      REMOVE_OUTSIDE_BOXES: True
+
+    - NAME: shuffle_points
+      SHUFFLE_ENABLED: {
+        'train': True,
+        'test': False
+      }
+
+    - NAME: transform_points_to_voxels
+      VOXEL_SIZE: [0.1, 0.1, 0.15]
+      MAX_POINTS_PER_VOXEL: 5
+      MAX_NUMBER_OF_VOXELS: {
+        'train': 250000, 
+        'test': 400000
+      }

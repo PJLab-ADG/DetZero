@@ -1,0 +1,77 @@
+DATA_CONFIG:
+    _BASE_CONFIG_: cfgs/tk_dataset_cfgs/waymo_dataset.yaml
+
+MODEL:
+    NAME: DetZeroTracker
+
+    TRACKING:
+        NAME: TrackManager
+
+        FILTER:
+            NAME: KalmanFilter
+            X_DIM: 5
+            Z_DIM: 3
+            Q: [5, 15]
+            P: [50, 1000]
+            R: 0.1
+            DELTA_T: 0.1
+
+        TRACK_AGE:
+            BIRTH_AGE: 1
+            DEATH_AGE: -1
+
+        DATA_ASSOCIATION:
+            CLASS_NAME: ['Vehicle', 'Pedestrian', 'Cyclist']
+            DISTINGUISH_CLASS: True
+            DISTANCE_METHOD: 'IoUBEV'
+            ASSIGNMENT_METHOD: 'GNN'
+            
+            STAGE:
+                NAME: 'two_stage'
+                FIRST_STAGE:
+                    DIST_THRESHOLD: 
+                        [0.2, 0.1, 0.1]
+
+                SECOND_STAGE:
+                    SCORE_THRESHOLD:
+                        [0.1, 0.1, 0.1]
+                    POINT_THRESHOLD:
+                        # [3, 1, 1]
+                        [0, 0, 0]
+                    DIST_THRESHOLD:
+                        [0.3, 0.15, 0.15]
+
+        TRACK_MERGE:
+            ENABLE: True
+            CLASS_NAME: ['Vehicle', 'Pedestrian', 'Cyclist']
+            CLASS_THRESHOLD: [0.5, 0.4, 0.4]
+
+        REVERSE_TRACKING:
+            ENABLE: True
+
+    POST_PROCESS:
+        NAME: PostProcessor
+
+        CONFIG_LIST:
+            - NAME: empty_track_delete
+              LEAST_AGE: 5
+              END_REMOVE: True
+
+            - NAME: velocity_optimize
+              HEADER_LENGTH: 3
+
+            - NAME: motion_classify
+
+            - NAME: static_drift_eliminate
+
+            # - NAME: box_size_update
+            #   METHOD: 'score_weigthed_box'
+            #   METHOD: 'max_score_box'
+            #   METHOD: 'largest_box'
+
+REFINING:
+    IOU_THRESHOLDS: {
+        'Vehicle': 0.3, 
+        'Pedestrian': 0.1, 
+        'Cyclist': 0.1
+    }
