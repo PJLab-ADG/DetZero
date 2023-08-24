@@ -73,12 +73,12 @@ https://github.com/PJLab-ADG/DetZero/assets/25716775/bbbd8735-25f9-4d64-a388-033
 
 | DET | TRK | GRM | PRM | CRM | mAPH_L2 | VEH | PED | CYC | Log |
 | :---: | :---: | :--: | :--: | :--: | :---: | :---: | :---: | :---: | :---: |
-| &check; |   |   |   |   | 76.24 | 82.57/75.09 | 83.23/76.47 | 79.35/77.16 | [log](docs/det_and_track_eval_log.txt) |
-| &check; | &check; |   |   |   | 76.44 | 82.57/75.24 | 83.07/76.34 | 79.86/77.75 | [log](docs/det_and_track_eval_log.txt) |
-| &check; | &check; | &check; |   |   | 78.00 | 84.49/77.17 | 84.71/78.04 | 80.23/78.08 | [log](docs/combination_eval_log.txt) |
-| &check; | &check; |   | &check; |   | 78.25 | 85.48/78.55 | 84.32/77.78 | 80.49/78.43 | [log](docs/combination_eval_log.txt) |
-| &check; | &check; | &check; | &check; |   | 79.79 | 87.81/81.01 | 85.94/79.48 | 80.97/78.87 | [log](docs/combination_eval_log.txt) |
-| &check; | &check; | &check; | &check; | &check; | 81.70 | 89.06/82.92 | 87.06/81.01 | 83.11/81.17 | [log](docs/combination_eval_log.txt) |
+| &check; |   |   |   |   | 76.24 | 82.57/75.09 | 83.23/76.47 | 79.35/77.16 | [log](docs/log_det_and_track_eval.txt) |
+| &check; | &check; |   |   |   | 76.44 | 82.57/75.24 | 83.07/76.34 | 79.86/77.75 | [log](docs/log_det_and_track_eval.txt) |
+| &check; | &check; | &check; |   |   | 78.00 | 84.49/77.17 | 84.71/78.04 | 80.23/78.08 | [log](docs/log_combination_eval.txt) |
+| &check; | &check; |   | &check; |   | 78.25 | 85.48/78.55 | 84.32/77.78 | 80.49/78.43 | [log](docs/log_combination_eval.txt) |
+| &check; | &check; | &check; | &check; |   | 79.79 | 87.81/81.01 | 85.94/79.48 | 80.97/78.87 | [log](docs/log_combination_eval.txt) |
+| &check; | &check; | &check; | &check; | &check; | 81.70 | 89.06/82.92 | 87.06/81.01 | 83.11/81.17 | [log](docs/log_combination_eval.txt) |
 
 
 ## Cite
