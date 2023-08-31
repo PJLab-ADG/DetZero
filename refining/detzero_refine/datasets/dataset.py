@@ -230,11 +230,21 @@ class DatasetTemplate(torch.utils.data.Dataset):
 
         for key, val in data_dict.items():
             try:
-                if key in ['obj_cls', 'geo_query_points', 'geo_memory_points',
+                if key in ['obj_cls', 'geo_memory_points',
                            'pos_init_box', 'pos_query_points', 'pos_memory_points',
                            'pos_trajectory', 'gt_pos_trajectory', 'padding_mask',
                            'iou', 'conf_score', 'conf_points']:
                     ret[key] = np.stack(val, axis=0)
+
+                elif key in ['geo_query_points']:
+                    max_len = max(data_dict['geo_query_num'])
+                    temp = []
+                    for i, pts in enumerate(val):
+                        pts = np.array(pts)
+                        pts_pad = np.zeros([max_len-pts.shape[0], pts.shape[1], pts.shape[2]])
+                        pts_pad = np.concatenate([pts, pts_pad], axis=0)
+                        temp.append(pts_pad)
+                    ret[key] = np.stack(temp, axis=0)
 
                 elif key in ['geo_query_boxes', 'gt_geo_query_boxes']:
                     max_len = max(data_dict['geo_query_num'])
