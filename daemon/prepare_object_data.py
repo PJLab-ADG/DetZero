@@ -43,28 +43,31 @@ class WaymoObjectDataPrepare():
         """        
         self.logger.info('Loading generated object tracks for %s set.' % self.split)
         with open(self.tk_data_path, 'rb') as f:
-            self.waymo_infos = pickle.load(f)
-        self.logger.info('Total object tracks for Waymo dataset: %d.' % len(self.waymo_infos))
+            waymo_infos = pickle.load(f)
+        
+        seq_names = list(waymo_infos.keys())
+        waymo_infos = [{seq: waymo_infos[seq]} for seq in seq_names]
+        self.logger.info('Total object sequences for Waymo dataset: %d.' % len(waymo_infos))
 
         self.logger.info('Start to convert object tracks into frame-level format.')
-        seq_names = list(self.waymo_infos.keys())
-        res = multi_processing(self.convert_track_into_frame, seq_names, self.workers, bar=True)
-        self.processed_infos = dict(zip(seq_names, res))
+        multi_processing(self.prepare_data_worker, waymo_infos, self.workers, bar=True)
 
-        self.logger.info('Start to crop object points.')
-        multi_processing(self.crop_object_points, seq_names, self.workers, bar=True)
-        self.logger.info('Object data preparison finished.')
 
-    def convert_track_into_frame(self, seq):
+    def prepare_data_worker(self, seq_dict):
         output_dict = {}
+        seq, seq_info = list(seq_dict.items())[0]
+        save_path = os.path.join(self.save_path, '%s.pkl' % seq)
+        if os.path.exists(save_path):
+            return
 
+        # 1. convert the object track data into frame-level format
         # train split: use gt to train the refining model
         # val split: use gt to calculate the recall metric
         if self.split in ['train', 'val']:
             # process the tracklets which have corresponding gt labels
-            tracklet_ids = self.waymo_infos[seq]['label'].keys()
+            tracklet_ids = seq_info['label'].keys()
             for tk_id in tracklet_ids:
-                tklet = self.waymo_infos[seq]['label'][tk_id]
+                tklet = seq_info['label'][tk_id]
                 tk_infos = tklet['track']
                 gt_infos = tklet['gt']
                 
@@ -136,7 +139,7 @@ class WaymoObjectDataPrepare():
 
             
             # process the tracklets which have no matched gt labels
-            fp_infos = self.waymo_infos[seq]['unlabel']
+            fp_infos = seq_info['unlabel']
             tracklet_ids = fp_infos.keys()
             for tk_id in tracklet_ids:
                 tk_infos = fp_infos[tk_id]['track']
@@ -189,9 +192,9 @@ class WaymoObjectDataPrepare():
         
         # test split: inference stage with no gt
         elif self.split == 'test':
-            tracklet_ids = self.waymo_infos[seq].keys()
+            tracklet_ids = seq_info.keys()
             for tk_id in tracklet_ids:
-                tk_infos = self.waymo_infos[seq][tk_id]
+                tk_infos = seq_info[tk_id]
                 if self.class_name not in tk_infos['name']:
                     continue
 
@@ -234,15 +237,12 @@ class WaymoObjectDataPrepare():
 
                     output_dict[frm_id] = tmp_info
 
-        return output_dict
 
-    def crop_object_points(self, seq):
-        seq_info = self.processed_infos[seq]
-        frame_ids = seq_info.keys()
+        # 2. crop the object points
+        frame_ids = output_dict.keys()
         data_info = {}
-        
         for frm_id in frame_ids:
-            frm_info = seq_info[frm_id]
+            frm_info = output_dict[frm_id]
             for key in frm_info.keys():
                 if key not in ['sample_idx', 'matched', 'matched_tracklet']:
                     frm_info[key] = np.array(frm_info[key])
@@ -322,9 +322,12 @@ class WaymoObjectDataPrepare():
                     continue
                 data_info[obj_id][key] = np.array(obj_info[key])
 
-        save_path = os.path.join(self.save_path, '%s.pkl' % seq)
+        # save the generated infos
         with open(save_path, 'wb') as f:
             pickle.dump(data_info, f)
+
+        del data_info
+
  
 
 if __name__ == '__main__':
