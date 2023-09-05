@@ -164,10 +164,14 @@ class PositionTransformer(nn.Module):
                 self.preds_dict['heading_cls'][i, :num, :],
                 self.targets_dict['heading_cls'][i, :num]
             ) / bs
-            dir_reg_loss += reg_loss(
+
+            dir_tmp_loss += reg_loss(
                 self.preds_dict['heading_reg'][i, :num, :],
                 self.targets_dict['heading_reg'][i, :num, :]
-            ).sum() / bs / num
+            )
+            dir_tmp_loss = torch.gather(dir_tmp_loss, 1,
+                self.targets_dict["heading_cls"][i, :num].unsqueeze(-1))
+            dir_reg_loss += dir_tmp_loss.sum() / bs / num
 
         tb_dict.update({
             'center_reg_loss': cent_reg_loss,
