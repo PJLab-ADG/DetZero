@@ -108,7 +108,7 @@ def init_coords_transform(init_box, pts, traj=None, traj_gt=None):
 
 def box_coords_transform(traj, init_box):
     traj[:, :3] = traj[:, :3] @ np.linalg.inv(rotate_yaw(init_box[6]).T)
-    traj[:, :3] += traj[:, :3]
+    traj[:, :3] += init_box[:3]
     
     traj[:, 6] += init_box[6]
     traj[:, 6] = limit_heading_range(traj[:, 6])
