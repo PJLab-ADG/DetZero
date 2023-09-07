@@ -165,7 +165,7 @@ class PositionTransformer(nn.Module):
                 self.targets_dict['heading_cls'][i, :num]
             ) / bs
 
-            dir_tmp_loss += reg_loss(
+            dir_tmp_loss = reg_loss(
                 self.preds_dict['heading_reg'][i, :num, :],
                 self.targets_dict['heading_reg'][i, :num, :]
             )
