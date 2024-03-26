@@ -23,6 +23,7 @@ https://github.com/PJLab-ADG/DetZero/assets/25716775/bbbd8735-25f9-4d64-a388-033
 
 
 ## Highlights
+- **`2024-03-26`** :hourglass_flowing_sand: We are going to release the trained model at [this link](https://drive.google.com/drive/folders/1SUzMox9oNte_DYkeceERDSNMWvKKUeGn?usp=sharing).
 - **`2023-08-24`** :dart: DetZero code is released.
 - **`2023-07-14`** DetZero is accepted by ICCV 2023.
 - **`2023-06-12`** The first version of DetZero [paper](https://arxiv.org/abs/2306.06023.pdf) is available on arXiv.
