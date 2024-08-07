@@ -95,7 +95,7 @@ If you find our work helpful, please kindly cite our paper:
 
 
 ## Contact
-- If you have any questions about this repo, please contact us through `taoma@link.cuhk.edu.hk` and `shibotian@pjlab.org.cn`.
+- If you have any question about this repo, please contact us through `taoma@link.cuhk.edu.hk` and `shibotian@pjlab.org.cn`.
 
 
 
